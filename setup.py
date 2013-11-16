@@ -8,10 +8,7 @@ Example::
 
     .. yuml:: 
        :alt: [Customer]->[Billing Address]
-       :type: class, activity or usecase
-       :scale: positive integer value
-       :direction: LR, TD or RL
-       :style: boring, plain, scruffy
+       :type: class
 
        [Customer]->[Billing Address]
 

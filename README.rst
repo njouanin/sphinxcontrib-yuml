@@ -28,7 +28,7 @@ Installing from git checkout
 
 Checkout sphinxcontrib-yuml::
 
-  $ git clone https://.../sphinxcontrib-yuml/
+  $ git clone https://github.com/njouanin/sphinxcontrib-yuml.git
 
 Change into the sphinxcontrib-yuml directory::
 

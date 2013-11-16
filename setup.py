@@ -20,7 +20,7 @@ setup(
     url='https://github.com/njouanin/sphinxcontrib-yuml',
     packages=find_packages(),
     license='GPLv3',
-	description='Sphinx extension yuml',
+	description='Sphinx extension for embedding yuml diagram in documentations',
     long_description=long_desc,
     classifiers=[
         'Development Status :: 4 - Beta',

@@ -11,6 +11,7 @@
 
 import posixpath
 import urllib2, urllib
+import re
 from os import path
 from docutils import nodes
 from docutils.parsers.rst import directives
@@ -85,6 +86,7 @@ class YumlDirective(directives.images.Image):
         if isinstance(image_node, nodes.system_message):
             return [image_node]
         text = '\n'.join(self.content)
+        text = re.sub(r'\n',',', text)
         image_node.yuml = dict(text=text,options=yuml_options)
         return [image_node]
         

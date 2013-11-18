@@ -37,6 +37,14 @@ Yuml tests and samples
 
 	[note: You can stick notes on diagrams too!{bg:cornsilk}],[Customer]<>1-orders 0..*>[Order], [Order]++*-*>[LineItem], [Order]-1>[DeliveryMethod], [Order]*-*>[Product], [Category]<->[Product], [DeliveryMethod]^[National], [DeliveryMethod]^[International]
 
+.. yuml::
+
+    [Brewery]<>-*>[Equipment]
+    [Equipment]-*>[Sensor]
+    [Sensor]-1>[SamplingConfiguration]
+    [Sensor]-1>[ConversionConfiguration]
+
+
 Indices and tables
 ==================
 

@@ -136,7 +136,7 @@ def render_yuml(app, uri, text, options):
     docdir = (path.dirname(app.builder.env.docname))
 
     try:
-        app.debug('[Yuml] generating diagram in %s' % fname)
+        debug(app, '[Yuml] generating diagram in %s' % fname)
         opts = option_map['style']
         if 'scale' in option_map:
             opts += ';scale:%s' % option_map['scale']
@@ -146,7 +146,7 @@ def render_yuml(app, uri, text, options):
         except Exception:
             data = urllib.quote(text.encode('utf-8'))
         url = '%s/%s/%s/%s.%s' % (app.builder.config.yuml_server_url.strip('/'), opts, option_map['type'], data, term)
-        app.debug('[Yuml]   with URL %s' % url)
+        debug(app, '[Yuml]   with URL %s' % url)
         headers = {
             'User-Agent' : 'sphinxcontrib/yuml v0.1',
             'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -160,6 +160,13 @@ def render_yuml(app, uri, text, options):
         raise YumlError(str(e))
 
     return relfn
+
+def debug(app, msg):
+    try:
+        app.debug(msg)
+    except Exception as e:
+        pass
+
 
 def setup(app):
     app.add_config_value('yuml_server_url', 'http://yuml.me/diagram/', 'html')

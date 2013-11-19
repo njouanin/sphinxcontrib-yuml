@@ -165,7 +165,7 @@ def debug(app, msg):
     try:
         app.debug(msg)
     except Exception as e:
-        pass
+        app.builder.info('[Debug] ' + msg)
 
 
 def setup(app):

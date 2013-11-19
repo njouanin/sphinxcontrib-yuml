@@ -16,7 +16,7 @@ Example::
 
 setup(
     name='sphinxcontrib-yuml',
-    version='0.2',
+    version='0.3',
     url='https://github.com/njouanin/sphinxcontrib-yuml',
     packages=find_packages(),
     license='GPLv3',

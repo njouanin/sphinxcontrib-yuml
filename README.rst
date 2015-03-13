@@ -73,8 +73,8 @@ Configuration
 For now one optional configuration is added to Sphinx_. It can be set in
 ``conf.py`` file:
 
-``yuml_fromat`` <dict>:
-  image format used for the different builders. ``latex`` and ``html`` fromats
+``yuml_format`` <dict>:
+  image format used for the different builders. ``latex`` and ``html`` formats
   are supported.
 
   For example::

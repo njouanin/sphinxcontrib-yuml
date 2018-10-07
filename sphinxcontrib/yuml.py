@@ -49,13 +49,13 @@ class YumlDirective(directives.images.Image):
            :type: class, activity or usecase
            :scale: positive integer value
            :direction: LR, TD or RL
-           :style: boring, plain, scruffy
+           :style: boring, nofunky, plain, scruffy
 
            [Customer]->[Billing Address]
     """
     type_values = ('class', 'activity', 'usecase')
     direction_values = ('LR', 'RL', 'TD')
-    style_values=('boring', 'plain', 'scruffy')
+    style_values=('boring', 'nofunky', 'plain', 'scruffy')
 
     def type_choice(argument):
         return directives.choice(argument, YumlDirective.type_values)
@@ -81,6 +81,8 @@ class YumlDirective(directives.images.Image):
 
     def run(self):
         yuml_options = dict([(k,v) for k,v in self.options.items() if k in self.own_option_spec])
+        if yuml_options.get('style') == 'boring':
+            yuml_options['style'] = 'nofunky'
         self.arguments = ['']
 
         (image_node,) = directives.images.Image.run(self)

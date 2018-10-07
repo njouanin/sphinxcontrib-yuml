@@ -15,6 +15,7 @@ import re
 from os import path
 from docutils import nodes
 from docutils.parsers.rst import directives
+import docutils.parsers.rst.directives.images
 from sphinx.errors import SphinxError
 from sphinx.util import ensuredir, relative_uri
 try:
@@ -174,4 +175,3 @@ def setup(app):
     app.add_config_value('yuml_options', DEFAULT_OPTIONS, '')
     app.connect('doctree-read', render_yuml_images)
     app.add_directive('yuml', YumlDirective)
-    

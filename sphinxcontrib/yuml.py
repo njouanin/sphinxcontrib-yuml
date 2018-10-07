@@ -19,6 +19,27 @@ from docutils.parsers.rst import directives
 import docutils.parsers.rst.directives.images
 from sphinx.errors import SphinxError
 from sphinx.util import ensuredir, relative_uri
+
+try:
+    from sphinx.util import logging
+    logger = logging.getLogger(__name__)
+    def log_warn(app, message):
+        logger.warning(message)
+    def log_info(app, message):
+        logger.info(message)
+    def debug(app, message):
+        logger.debug(message)
+except ImportError:
+    def log_warn(app, message):
+        app.builder.warn(message)
+    def log_info(app, message):
+        app.builder.info(message)
+    def debug(app, message):
+        try:
+            app.debug(message)
+        except Exception:
+            log_info(app, '[Debug] ' + message)
+
 try:
     from hashlib import sha1 as sha
 except ImportError:
@@ -95,7 +116,7 @@ class YumlDirective(directives.images.Image):
         return [image_node]
         
 def render_yuml_images(app, doctree):
-    app.builder.info('Rendering Yuml')
+    log_info(app, 'Rendering Yuml')
     for img in doctree.traverse(nodes.image):
         if not hasattr(img, 'yuml'):
             continue
@@ -134,7 +155,7 @@ def render_yuml(app, uri, text, options):
     else:
         # Non-HTML
         if app.builder.format != 'latex':
-            app.builder.warn('yuml: the builder format %s is not supported.' % app.builder.format)
+            log_warn(app, 'yuml: the builder format %s is not supported.' % app.builder.format)
         relfn = fname
         outfn = path.join(app.builder.outdir, fname)
 
@@ -168,13 +189,6 @@ def render_yuml(app, uri, text, options):
         raise YumlError(str(e))
 
     return relfn
-
-def debug(app, msg):
-    try:
-        app.debug(msg)
-    except Exception:
-        app.builder.info('[Debug] ' + msg)
-
 
 def setup(app):
     app.add_config_value('yuml_server_url', 'http://yuml.me/diagram/', 'html')

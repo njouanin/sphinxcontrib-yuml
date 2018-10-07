@@ -9,6 +9,7 @@
     :license: GPLv3
 """
 
+import sys
 import posixpath
 import urllib2, urllib
 import re
@@ -105,8 +106,10 @@ def render_yuml_images(app, doctree):
         try:
             img['uri'] = render_yuml(app, uri, text, options)
             img['candidates']={'?':''}
-        except YumlError, exc:
-            app.builder.warn('yuml error: ' + str(exc))
+        except YumlError:
+            (_t, exc, _tb) = sys.exc_info()
+            del(_tb)
+            log_warn(app, 'yuml error: ' + str(exc))
             img.replace_self(nodes.literal_block(text, text))
             continue
 
@@ -159,7 +162,9 @@ def render_yuml(app, uri, text, options):
         out = open(outfn, 'wb')
         out.write(rep)
         out.close()
-    except Exception as e:
+    except Exception:
+        (_t, e, _tb) = sys.exc_info()
+        del(_tb)
         raise YumlError(str(e))
 
     return relfn
@@ -167,7 +172,7 @@ def render_yuml(app, uri, text, options):
 def debug(app, msg):
     try:
         app.debug(msg)
-    except Exception as e:
+    except Exception:
         app.builder.info('[Debug] ' + msg)
 
 
